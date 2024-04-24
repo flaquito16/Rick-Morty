@@ -1,44 +1,35 @@
 import React, { useEffect, useState } from 'react'
-import { content } from '../Content/Content'
 import { Card } from '../Card/Card'
 
 
 export const Main = () => {
-const [url, setUrl] = useState("https://rickandmortyapi.com/api/character")
+
+    const URL='https://rickandmortyapi.com/api/character'
+
 const [content, setContent] = useState([])
 
 
     useEffect(() => {
-        function getApi(URL) {
+        
             fetch(URL)
             .then( response => response.json() )
             .then (data => {
-                data.results.forEach(character => {
-                    createCard(character)
+                setContent (data.results)
+
+
+
                 });
-            })
-        }
-        
-    
-      return () => {
-        second
-      }
-    }, [])
-    
+            },[content])
 
   return (
     <div>
        {
-       
-        content.map(card=>(
-            <Card
+            content.map(character=> <Card
+                key={id}
+                img={character.image}
+                names={character.name}
             
-                img={card.img}
-                name={card.name}
-            
-            />
-        ))
-
+            />)
        }
     </div>
   )
